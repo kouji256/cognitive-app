@@ -2,6 +2,7 @@
 // 3通りとも、問題で問う事実(Q1・Q2の根拠)をすべて含める。違うのは「伝え方の形」だけ。
 // 答えの数値は tests/explain_content.test.mjs で、別の計算で検算している。
 import { el } from './ui.js';
+import { s } from './svg.js';
 
 export const FORMATS = [
   { key: 'formula', label: '式' },
@@ -14,13 +15,6 @@ const P = (s) => ({ t: 'p', s });
 const F = (s) => ({ t: 'f', s });
 
 // ---------- SVG 部品(内容は textContent / setAttribute のみで作る) ----------
-const NS = 'http://www.w3.org/2000/svg';
-function s(tag, attrs, ...kids) {
-  const e = document.createElementNS(NS, tag);
-  for (const [k, v] of Object.entries(attrs || {})) e.setAttribute(k, String(v));
-  kids.flat(Infinity).forEach((c) => { if (c != null) e.append(c.nodeType ? c : document.createTextNode(String(c))); });
-  return e;
-}
 const svgRoot = (w, h, label, ...kids) => s('svg', { viewBox: `0 0 ${w} ${h}`, class: 'diagram', role: 'img', 'aria-label': label }, ...kids);
 const T = (x, y, t, cls = 'sv-t', anchor = 'middle') => s('text', { x, y, class: cls, 'text-anchor': anchor }, t);
 const box = (x, y, w, h, c) => s('rect', { x, y, width: w, height: h, class: 'sv-' + c });

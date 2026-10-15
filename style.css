@@ -105,3 +105,26 @@ input:focus, textarea:focus, button:focus-visible { outline: 3px solid var(--acc
 .sv-cy { fill: #ffe08a; fill-opacity: .88; stroke: #6b5200; stroke-width: 1.5; }
 .sv-frame { fill: none; stroke: var(--line); stroke-width: 1.5; }
 .sv-line { stroke: var(--sub); stroke-width: 1.4; }
+
+/* 追加テスト: 記号照合 / 図形パターン / 類推 / ストループ */
+.pairarea { display: flex; gap: 12px; justify-content: center; min-height: 160px; margin: 8px 0; }
+.glyph { flex: 1 1 0; max-width: 170px; aspect-ratio: 1; background: var(--card); border: 1.5px solid var(--line); border-radius: 12px; }
+.gl-line { fill: none; stroke: var(--text); stroke-width: 3; }
+.gl-line.thin { stroke-width: 2; }
+.gl-fill { fill: var(--text); }
+.analogy { font-size: 22px; font-weight: 700; text-align: center; margin: 24px 0; }
+.mgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; max-width: 300px; margin: 10px auto; }
+.mbox { background: #fff; border: 1.5px solid var(--line); border-radius: 8px; }
+.mcell { width: 100%; height: auto; display: block; }
+.mq { font-size: 40px; fill: #6b7280; font-weight: 700; }
+.mopts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 360px; margin: 8px auto; }
+.mopt { background: #fff; padding: 2px; min-height: 0; aspect-ratio: 1; }
+.mx { stroke-width: 2.5; }
+.mx.c0 { stroke: #2563eb; --f: #2563eb; } .mx.c1 { stroke: #d97706; --f: #d97706; } .mx.c2 { stroke: #15803d; --f: #15803d; }
+.mx.f0 { fill: none; } .mx.f1 { fill: var(--f); fill-opacity: .3; } .mx.f2 { fill: var(--f); fill-opacity: 1; }
+.stroop-stim { height: 150px; display: flex; align-items: center; justify-content: center; font-size: 80px; font-weight: 800; background: #1b1f27; border-radius: 12px; color: #cfd6e0; margin: 8px 0 16px; letter-spacing: 4px; }
+.stroop-pad { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.stroop-btn { min-height: 84px; border-radius: 14px; border: 3px solid transparent; cursor: pointer; }
+.stroop-btn:disabled { opacity: .55; cursor: default; }
+.ink-r { color: #ff5252; } .ink-b { color: #4d8dff; } .ink-g { color: #3ddc6a; } .ink-y { color: #ffd93d; }
+.stroop-btn.ink-r { background: #ff5252; } .stroop-btn.ink-b { background: #4d8dff; } .stroop-btn.ink-g { background: #3ddc6a; } .stroop-btn.ink-y { background: #ffd93d; }

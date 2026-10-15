@@ -1,10 +1,12 @@
 // オフライン対応: アプリ本体(HTML/JS/CSS)だけを端末に保存する。記録の送信(POST)や Google への通信は一切触らない。
 // 更新したら CACHE の名前を変える(古い版が残り続けるのを防ぐ)
-const CACHE = 'cogapp-v2';
+const CACHE = 'cogapp-v3';
 const SHELL = [
   './', './index.html', './style.css', './manifest.webmanifest',
   './js/main.js', './js/ui.js', './js/store.js', './js/forms.js', './js/recall.js',
-  './js/testcommon.js', './js/tests_span.js', './js/test_rotation.js', './js/geom.js', './js/explain.js', './js/explain_content.js',
+  './js/testcommon.js', './js/tests_span.js', './js/test_rotation.js', './js/geom.js', './js/explain.js', './js/explain_content.js', './js/svg.js',
+  './js/gen_symbol.js', './js/gen_matrix.js', './js/gen_stroop.js', './js/analogy_bank.js',
+  './js/test_symbol.js', './js/test_matrix.js', './js/test_analogy.js', './js/test_stroop.js',
   './icons/icon.svg', './icons/icon-192.png', './icons/icon-512.png',
 ];
 

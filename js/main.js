@@ -5,6 +5,10 @@ import { recallView, dueCount } from './recall.js';
 import { SPAN_TESTS, spanTitle, runSpanTest } from './tests_span.js';
 import { runRotationTest } from './test_rotation.js';
 import { runExplainCompare, runExplainDelayed } from './explain.js';
+import { runSymbolTest } from './test_symbol.js';
+import { runMatrixTest } from './test_matrix.js';
+import { runAnalogyTest } from './test_analogy.js';
+import { runStroopTest } from './test_stroop.js';
 import { createCtx } from './testcommon.js';
 import { getConfig, setConfig, isConfigured, flush, pendingCount, getStatus, onChange, testConnection, isValidUrl } from './store.js';
 
@@ -71,6 +75,10 @@ function tests() {
     ['説明を読んで理解するテスト', '約15分 ・ 式・図・文章で読み、見ずに答える(3日後・7日後に再テスト)', () => start(runExplainCompare)],
     ...SPAN_TESTS.map((id) => [spanTitle(id), id === 'digit_span' ? '約8分 ・ 順唱と逆唱' : '約5分 ・ 位置を逆順に', () => start((c) => runSpanTest(c, id))]),
     ['3D心的回転', '約6分 ・ 立体が同じ形か鏡像か', () => start(runRotationTest)],
+    ['処理速度(記号照合)', '約5分 ・ 2つの記号が同じか違うかを60秒×3', () => start(runSymbolTest)],
+    ['流動性推論(図形パターン)', '約12分 ・ 3×3の規則を見つけて欠けた1つを選ぶ', () => start(runMatrixTest)],
+    ['言語の類推', '約8分 ・ A:B = C:? の4択', () => start(runAnalogyTest)],
+    ['注意・抑制(ストループ)', '約4分 ・ 文字の意味を無視して色を答える', () => start(runStroopTest)],
   ];
   rows.forEach(([t, d, fn]) => menu.append(el('button', { type: 'button', class: 'menu-item', onclick: fn },
     el('span', { class: 'mi-t', text: t }), el('span', { class: 'mi-d', text: d }))));

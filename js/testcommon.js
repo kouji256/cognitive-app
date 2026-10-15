@@ -63,11 +63,34 @@ export function askPre(ctx, { title, desc, maxScore, predictLabel }) {
   }));
 }
 
+export const ITEMS_JSON_LIMIT = 44000; // 受け口のセル上限(45000字)に収める
+
+/**
+ * items_json を上限内に収める。問題数の多いテスト(処理速度など)で上限を超えないための安全装置。
+ *   1) 分析に必要な最小の項目だけ残す  2) それでも超えるなら末尾の問題を落とし、meta.truncated に落とした数を記録
+ */
+export function fitItemsJson(meta, items, limit = ITEMS_JSON_LIMIT) {
+  let out = JSON.stringify({ meta, items });
+  if (out.length <= limit) return out;
+  const KEEP = ['n', 'block', 'cond', 'level', 'ok', 'rt', 'conf', 'practice', 'topic', 'kind'];
+  let slim = items.map((it) => Object.fromEntries(Object.entries(it).filter(([k]) => KEEP.includes(k))));
+  out = JSON.stringify({ meta, items: slim });
+  if (out.length <= limit) return out;
+  let dropped = 0;
+  while (slim.length > 1) {
+    const cut = Math.max(1, Math.floor(slim.length * 0.05));
+    slim = slim.slice(0, slim.length - cut); dropped += cut;
+    out = JSON.stringify({ meta: Object.assign({}, meta, { truncated: dropped }), items: slim });
+    if (out.length <= limit) return out;
+  }
+  return out;
+}
+
 /** 結果を保存して、要約を表示する */
 export function saveResult({ testId, testVersion, items, meta, score, state }) {
   const rec = addRecord('test_results', {
     test_id: testId, test_version: testVersion,
-    items_json: JSON.stringify({ meta, items }),
+    items_json: fitItemsJson(meta, items),
     score, predicted: state.predicted, sleepy: state.sleepy, tired: state.tired,
   });
   return rec;
